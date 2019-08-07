@@ -1,0 +1,11 @@
+/target/
+/.git/
+/.settings/
+.project
+.idea/
+.classpath
+.settings
+target
+*.iml
+rebel.xml
+application-ignore.properties
