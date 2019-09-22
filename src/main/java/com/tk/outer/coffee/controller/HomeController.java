@@ -1,16 +1,5 @@
 package com.tk.outer.coffee.controller;
 
-import com.google.gson.JsonObject;
-import com.tk.outer.coffee.configuration.WebConfig;
-import com.tk.outer.coffee.controller.base.BaseController;
-import com.tk.outer.coffee.domain.Category;
-import com.tk.outer.coffee.domain.CategoryElement;
-import com.tk.outer.coffee.domain.PrintBox;
-import com.tk.outer.coffee.domain.RandomElement;
-import com.tk.outer.coffee.domain.StarElement;
-import com.tk.outer.coffee.domain.UploadElement;
-import com.tk.outer.coffee.service.CoffeeService;
-import com.tk.outer.coffee.vo.CategoryVo;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -21,13 +10,14 @@ import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.xml.bind.DatatypeConverter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -41,6 +31,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonObject;
+import com.tk.outer.coffee.configuration.WebConfig;
+import com.tk.outer.coffee.controller.base.BaseController;
+import com.tk.outer.coffee.domain.CategoryElement;
+import com.tk.outer.coffee.domain.PrintBox;
+import com.tk.outer.coffee.domain.RandomElement;
+import com.tk.outer.coffee.domain.StarElement;
+import com.tk.outer.coffee.domain.UploadElement;
+import com.tk.outer.coffee.service.CoffeeService;
+import com.tk.outer.coffee.vo.CategoryVo;
+
+
 @Controller
 @RequestMapping(value = "/", method = {RequestMethod.GET})
 public class HomeController extends BaseController {
@@ -53,12 +55,13 @@ public class HomeController extends BaseController {
 
   @RequestMapping("")
   public String index(@RequestParam(defaultValue = "zh") String language) {
+	 
     if(language.equals("zh") || language.equals("zh_CN") || language.equals("zh_TW") || language.equals("zh_HK")) {
       session.setAttribute("lang", 0);
     } else {
       session.setAttribute("lang", 1);
     }
-    model.put("categories", service.getCategories());
+    model.put("categories", service.getCategories(request));
     return "index";
   }
 
@@ -71,7 +74,7 @@ public class HomeController extends BaseController {
 
   @RequestMapping("edit")
   public String edit(@RequestParam(defaultValue = "0") Integer id) {
-    model.put("categories", service.getCategories());
+    model.put("categories", service.getCategories(request));
     if (id != 0) {
       model.put("id", id);
     }

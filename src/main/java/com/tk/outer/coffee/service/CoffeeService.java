@@ -17,14 +17,18 @@ import com.tk.outer.coffee.repository.CategoryRepository;
 import com.tk.outer.coffee.repository.RegisterCodeRepository;
 import com.tk.outer.coffee.repository.UploadElementRepository;
 import com.tk.outer.coffee.util.ConfigUtil;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import javax.annotation.PostConstruct;
 import javax.persistence.criteria.Predicate;
+import javax.servlet.http.HttpServletRequest;
 
 import com.tk.outer.coffee.vo.CategoryVo;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,8 +72,25 @@ public class CoffeeService {
     }
   }
 
-  public List<Category> getCategories() {
-    return categoryRepository.findAll();
+  public List<CategoryVo> getCategories(HttpServletRequest request) {
+	    List<Category> list = categoryRepository.findAll();
+	    String language = request.getLocale().getLanguage();
+	    Boolean flag = false;
+	    if(!language.equals("zh") && !language.equals("zh_CN") && !language.equals("zh_TW") && !language.equals("zh_HK")){
+	    	flag = true;
+	    }
+	    List<CategoryVo> voList = new ArrayList<>();
+	    for(Category category : list){
+	      CategoryVo vo = new CategoryVo();
+	      vo.setId(category.getId());
+	      if(flag){
+	        vo.setName(category.getEnName());
+	      }else{
+	        vo.setName(category.getName());
+	      }
+	      voList.add(vo);
+	    }
+	    return voList;
   }
 
   public List<CategoryVo> getCategories(String device, String lang) {
