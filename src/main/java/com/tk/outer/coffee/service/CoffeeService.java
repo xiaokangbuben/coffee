@@ -72,18 +72,14 @@ public class CoffeeService {
     }
   }
 
-  public List<CategoryVo> getCategories(HttpServletRequest request) {
+  public List<CategoryVo> getCategories(int flag) {
 	    List<Category> list = categoryRepository.findAll();
-	    String language = request.getLocale().getLanguage();
-	    Boolean flag = false;
-	    if(!language.equals("zh") && !language.equals("zh_CN") && !language.equals("zh_TW") && !language.equals("zh_HK")){
-	    	flag = true;
-	    }
+
 	    List<CategoryVo> voList = new ArrayList<>();
 	    for(Category category : list){
 	      CategoryVo vo = new CategoryVo();
 	      vo.setId(category.getId());
-	      if(flag){
+	      if(flag == 1){
 	        vo.setName(category.getEnName());
 	      }else{
 	        vo.setName(category.getName());

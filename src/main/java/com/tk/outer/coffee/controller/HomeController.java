@@ -61,7 +61,14 @@ public class HomeController extends BaseController {
     } else {
       session.setAttribute("lang", 1);
     }
-    model.put("categories", service.getCategories(request));
+    String localeLanguage = request.getLocale().getLanguage();
+    int flag = 1;
+    if(localeLanguage.equals("zh") || localeLanguage.equals("zh_CN") || localeLanguage.equals("zh_TW") || localeLanguage.equals("zh_HK")){
+      flag = 0;
+    }
+    session.setAttribute("flag", flag);
+    model.put("categories", service.getCategories(flag));
+    model.put("localeLanguage", flag);
     return "index";
   }
 
@@ -74,7 +81,12 @@ public class HomeController extends BaseController {
 
   @RequestMapping("edit")
   public String edit(@RequestParam(defaultValue = "0") Integer id) {
-    model.put("categories", service.getCategories(request));
+    String localeLanguage = request.getLocale().getLanguage();
+    int flag = 1;
+    if(localeLanguage.equals("zh") || localeLanguage.equals("zh_CN") || localeLanguage.equals("zh_TW") || localeLanguage.equals("zh_HK")){
+      flag = 0;
+    }
+    model.put("categories", service.getCategories(flag));
     if (id != 0) {
       model.put("id", id);
     }
