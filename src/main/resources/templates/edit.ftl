@@ -7,8 +7,8 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <title>咖奶糕点拉花</title>
-  <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.css">
+<#if Session.lang ?? && (Session.lang == 1 || Session.flag == 1)><title>Coffee Drawing Machine</title><#else><title>咖奶糕点拉花</title></#if>
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.css">
   <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
   <link rel="stylesheet" href="${ctx}/css/app.css">
   <!-- 全局变量 -->
@@ -40,23 +40,23 @@
         <div class="bar bar-tab" id="bar_tab" style="bottom: 0rem">
           <a class="tab-item" id="btn_show_category">
             <img src="${ctx}/img/btn_select_image.png" class="icon">
-            <span class="tab-label"><#if Session.lang ?? && Session.lang == 1>MATERIAL<#else>素材</#if></span>
+            <span class="tab-label"><#if Session.lang ?? && (Session.lang == 1 || Session.flag == 1)>MATERIAL<#else>素材</#if></span>
           </a>
           <a class="tab-item" id="btn_show_input">
             <img src="${ctx}/img/btn_input_text.png" class="icon">
-            <span class="tab-label"><#if Session.lang ?? && Session.lang == 1>TEXT<#else>文字</#if></span>
+            <span class="tab-label"><#if Session.lang ?? && (Session.lang == 1 || Session.flag == 1)>TEXT<#else>文字</#if></span>
           </a>
           <div class="tab-item" id="btn_add_photo">
             <input type="file" id="btn_upload_image">
             <img src="${ctx}/img/btn_upload_image.png" class="icon">
-            <span class="tab-label"><#if Session.lang ?? && Session.lang == 1>PHOTO<#else>照片</#if></span>
+            <span class="tab-label"><#if Session.lang ?? && (Session.lang == 1 || Session.flag == 1)>PHOTO<#else>照片</#if></span>
           </div>
         </div>
 
         <!--素材类别-->
         <div class="buttons-tab" id="category_tabs" style="bottom: -2rem;overflow:scroll;">
           <#list categories as category>
-          <a href="#tab_${category.id}" category-id="${category.id}" class="tab-link button <#if category?index == 0>active</#if>"><#if Session.lang ?? && Session.lang == 1>${category.enName}<#else>${category.name}</#if></a>
+          <a href="#tab_${category.id}" category-id="${category.id}" class="tab-link button <#if category?index == 0>active</#if>"><#if Session.lang ?? && (Session.lang == 1 || Session.flag == 1)>${category.enName}<#else>${category.name}</#if></a>
           </#list>
         </div>
 
@@ -73,7 +73,7 @@
         <div id="input_pannel" style="bottom: -13rem;">
           <div class="content-block" style="margin: 0 0;">
             <div class="button-row">
-              <#if Session.lang ?? && Session.lang == 1>
+              <#if Session.lang ?? && (Session.lang == 1 || Session.flag == 1)>
                 <textarea style="color: #933500;" id="input_text" placeholder="Please enter the content" rows="4" cols="20"></textarea>
               <#else>
                 <textarea style="color: #933500;" id="input_text" placeholder="请输入文字内容，将手机设置为什么字体，DIY系统就使用什么字体。" rows="4" cols="20"></textarea>
@@ -91,8 +91,8 @@
               <a href="javascript:setTextColor('#FF9933');" class="button" style="background-color:#FF9933"></a>
             </p>
             <div class="row">
-              <div class="col-50"><a id="btn_input_ok" class="button button-fill button-success"><#if Session.lang ?? && Session.lang == 1>OK<#else>确定</#if></a></div>
-              <div class="col-50"><a id="btn_input_cancel" class="button button-fill button-success"><#if Session.lang ?? && Session.lang == 1>CANCEL<#else>取消</#if></a></div>
+              <div class="col-50"><a id="btn_input_ok" class="button button-fill button-success"><#if Session.lang ?? && (Session.lang == 1 || Session.flag == 1)>OK<#else>确定</#if></a></div>
+              <div class="col-50"><a id="btn_input_cancel" class="button button-fill button-success"><#if Session.lang ?? && (Session.lang == 1 || Session.flag == 1)>CANCEL<#else>取消</#if></a></div>
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@
 
         <!--提交按钮-->
         <div id="submit_div" style="display: none;">
-          <#if Session.lang ?? && Session.lang == 1>
+          <#if Session.lang ?? && (Session.lang == 1 || Session.flag == 1)>
             <img src="${ctx}/img/submit_en.png"/>
           <#else>
             <img src="${ctx}/img/submit.png"/>

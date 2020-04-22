@@ -31,6 +31,7 @@ import com.tk.outer.coffee.vo.CategoryVo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -72,21 +73,9 @@ public class CoffeeService {
     }
   }
 
-  public List<CategoryVo> getCategories(int flag) {
+  public List<Category> getCategories(int flag) {
 	    List<Category> list = categoryRepository.findAll();
-
-	    List<CategoryVo> voList = new ArrayList<>();
-	    for(Category category : list){
-	      CategoryVo vo = new CategoryVo();
-	      vo.setId(category.getId());
-	      if(flag == 1){
-	        vo.setName(category.getEnName());
-	      }else{
-	        vo.setName(category.getName());
-	      }
-	      voList.add(vo);
-	    }
-	    return voList;
+	    return list;
   }
 
   public List<CategoryVo> getCategories(String device, String lang) {

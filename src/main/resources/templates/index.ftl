@@ -25,7 +25,7 @@
       <div class="buttons-tab fixed-tab" style="overflow:scroll;">
         <a href="#tab_0" category-id="0" class="tab-link button active"><#if Session.lang ?? && (Session.lang == 1 || Session.flag == 1)>ALL<#else>全部</#if></a>
         <#list categories as category>
-          <a href="#tab_${category.id}" category-id="${category.id}" class="tab-link button"><#if Session.lang ?? && Session.lang == 1>${category.enName}<#else>${category.name}</#if></a>
+          <a href="#tab_${category.id}" category-id="${category.id}" class="tab-link button"><#if Session.lang ?? && (Session.lang == 1 || Session.flag == 1)>${category.enName}<#else>${category.name}</#if></a>
         </#list>
       </div>
 
